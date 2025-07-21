@@ -19,7 +19,7 @@ def obtener_datos_bcch():
     end_date = datetime(2025, 7, 21)
     start_date = end_date - timedelta(days=5*365)
     
-    # Nuevo endpoint y parámetros (actualizado Julio 2025)
+    # Endpoint y parámetros (actualizado Julio 2025)
     url = "https://si3.bcentral.cl/SieteRestWS/siete/WS/SeriesData"
     params = {
         'series': 'F073.TCO.PRE.Z.D',
@@ -55,7 +55,7 @@ def obtener_datos_bcch():
         valores = base * np.exp(np.cumsum(volatilidad * np.random.randn(len(fechas)) * 0.01))
         return pd.DataFrame({'Fecha': fechas, 'Valor': valores})
 
-# 2️⃣ Procesamiento mejorado
+# 2️⃣ Procesamiento
 def procesar_datos(df):
     """Calcula parámetros estocásticos con manejo robusto de outliers"""
     # Retornos logarítmicos
@@ -82,7 +82,7 @@ def procesar_datos(df):
     
     return mu, sigma, S0, df_filtrado
 
-# 3️⃣ Simulación GBM corregida (vectorizada)
+# 3️⃣ Simulación GBM (vectorizada)
 def simular_gbm(S0, mu, sigma, T=0.5, dt=1/252, n_sim=500):
     """Simulación vectorizada eficiente de trayectorias"""
     n_steps = int(T/dt)
@@ -99,7 +99,7 @@ def simular_gbm(S0, mu, sigma, T=0.5, dt=1/252, n_sim=500):
     
     return t, trayectorias
 
-# 4️⃣ Visualización profesional con fechas reales
+# 4️⃣ Visualización con fechas reales
 def visualizar_resultados(t, trayectorias, df, S0):
     plt.figure(figsize=(13, 7))
     
